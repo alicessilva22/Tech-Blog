@@ -5,8 +5,9 @@ const { Post, User, Comment } = require('../../models');
 
 
 router.post('/', (req, res) => {
+    console.log('-------------------', req.body)
     Post.create({
-            title: req.body.title,
+            title: req.body.post_title,
             post_body: req.body.post_body,
             user_id: req.session.user_id
         })

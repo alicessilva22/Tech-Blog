@@ -14,11 +14,7 @@ async function newFormHandler(event) {
         },
     });
 
-    if (response.ok) {
-        document.location.replace('/');
-    } else {
-        alert('Failed to add post');
-    }
+    document.location.replace('/dashboard');
 }
 
-document.querySelector('.new-post-form').addEventListener('submit', newFormHandler);
+document.querySelector('.create-btn').addEventListener('submit', newFormHandler);
