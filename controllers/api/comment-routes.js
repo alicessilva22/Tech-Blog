@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const withAuth = require('../../utils/auth');
-const { Comment, Posts, User } = require('../../models');
+// const withAuth = require('../../utils/auth');
+const { Comment, Post, User } = require('../../models');
 
 router.get('/', (req, res) => {
     Comment.findAll({})
@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    Comment.findAll({
+    Comment.findByPk({
             where: {
                 id: req.params.id
             }
@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
     if (req.session) {
         Comment.create({
                 comment_body: req.body.comment_body,
-                posts_id: req.body.posts_id,
+                post_id: req.body.post_id,
                 user_id: req.session.user_id,
             })
             .then(dbCommentData => res.json(dbCommentData))
