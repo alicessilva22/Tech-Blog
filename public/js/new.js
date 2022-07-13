@@ -1,12 +1,24 @@
-const title = document.querySelector('#post-title')
-const text = document.querySelector('#post-body')
+async function newFormHandler(event) {
+    event.preventDefault();
+    const post_title = document.querySelector('#post_title').value;
+    const post_body = document.querySelector('#post_body').value;
 
-function formHandler() {
-    fetch('/api/posts', {
+    const response = await fetch(`/api/posts`, {
         method: 'POST',
-        body: JSON.stringify({ title, text }),
-        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            post_title,
+            post_body,
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
     });
-};
 
-document .addEventListener('click', clickHandler());
+    if (response.ok) {
+        document.location.replace('/');
+    } else {
+        alert('Failed to add post');
+    }
+}
+
+document.querySelector('.new-post-form').addEventListener('submit', newFormHandler);
